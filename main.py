@@ -2,6 +2,20 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, logout_user, UserMixin, current_user, login_required
 import sqlite3
+import logging
+
+# Logging
+db_logger = logging.getLogger("sqlite_trace")
+db_logger.setLevel(logging.DEBUG)
+db_handler = logging.FileHandler("database.log")
+db_handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+db_handler.setFormatter(formatter)
+db_logger.addHandler(db_handler)
+
+
+def sql_trace(statement):
+    db_logger.debug("SQL TRACE: %s", statement)
 
 app = Flask(__name__, static_url_path = "/static")
 app.secret_key = "secret"
@@ -9,9 +23,10 @@ app.secret_key = "secret"
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
-@app.route("/search")
-def search():
+@app.route("/")
+def index():
     conn = sqlite3.connect('computer_store.db')
+    conn.set_trace_callback(sql_trace)
 
     q_search = request.args.get('search', '')
 
@@ -25,16 +40,6 @@ def search():
     conn.close()
     return render_template("index.html", products=products_dicts)
 
-@app.route("/")
-def index():
-    products = [
-        {"id": 1, "name": "CPU", "price": 100, "img": "cpu"},
-        {"id": 2, "name": "RAM", "price": 50, "img": "ram"}
-    ]
-    return render_template("index.html", products = products)
-
-
-
 
 class User(UserMixin):
     def __init__(self, id, username, password_hash):
@@ -45,6 +50,7 @@ class User(UserMixin):
     @staticmethod
     def get_by_id(id_):
         conn = sqlite3.connect("computer_store.db")
+        # conn.set_trace_callback(sql_trace)
         cursor = conn.cursor()
         
         cursor.execute("SELECT * FROM users WHERE id = ?", (id_, ))
@@ -58,6 +64,7 @@ class User(UserMixin):
     @staticmethod
     def get_by_username(username):
         conn = sqlite3.connect("computer_store.db")
+        conn.set_trace_callback(sql_trace)
         cursor = conn.cursor()
         
         cursor.execute("SELECT * FROM users WHERE username = ?", (username, ))
