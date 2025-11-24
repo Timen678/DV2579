@@ -1,0 +1,26 @@
+<html>
+    <head>
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <div class = "container d-flex justify-content-center">
+            <form method = "post" class = "mt-5 border rounded" style = "max-width: 30rem;">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div style = "color: red; margin-bottom: 0.5rem;"> {{messages[0]}} </div>
+                    {% endif %}
+                {% endwith %}
+
+                <div class = "form-group">
+                    <label for = "username">Username</label>
+                    <input type = "text" name = "username" class = "form-control " id = "username">
+                </div>
+                <div class = "form-group">
+                    <label for = "password">Password</label>
+                    <input type = "password" name = "password" class = "form-control" id = "password">
+                </div>
+                <button type = "submit" class = "btn btn-primary mt-1">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
