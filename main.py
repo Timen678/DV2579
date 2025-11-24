@@ -3,6 +3,21 @@ import sqlite3
 
 app = Flask(__name__, static_url_path = "/static")
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+@app.route("/upload", methods=["POST"])
+def upload():
+
+    image = request.files.get("image")
+    product_id = request.form.get("id")
+
+    print(image)
+    print(product_id)
+
+    return render_template("admin.html")
+
 @app.route("/search")
 def search():
     conn = sqlite3.connect('computer_store.db')
