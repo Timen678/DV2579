@@ -20,7 +20,6 @@ def sql_trace(statement):
 app = Flask(__name__, static_url_path = "/static")
 app.secret_key = "secret"
 
-<<<<<<< HEAD
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
@@ -36,15 +35,11 @@ def upload():
 
     return render_template("admin.html")
 
-@app.route("/search")
-def search():
-=======
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 @app.route("/")
 def index():
->>>>>>> refs/remotes/origin/main
     conn = sqlite3.connect('computer_store.db')
     conn.set_trace_callback(sql_trace)
 
