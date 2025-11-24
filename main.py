@@ -1,6 +1,23 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import sqlite3
 
 app = Flask(__name__, static_url_path = "/static")
+
+@app.route("/search")
+def search():
+    conn = sqlite3.connect('computer_store.db')
+
+    q_search = request.args.get('search', '')
+
+    products = conn.execute(f"SELECT id, product_name, price, image FROM products WHERE product_name like '%{q_search}%';").fetchall()
+    keys = ["id", "name", "price", "img"]
+
+    products_dicts = []
+    for product in products:
+        products_dicts.append(dict(zip(keys, product)))
+
+    conn.close()
+    return render_template("index.html", products=products_dicts)
 
 @app.route("/")
 def index():
