@@ -40,16 +40,16 @@ populate_tables = f"""
     ('admin', '{hashed_pass}');
 
     INSERT INTO products (product_name, price, image) VALUES 
-    ('Wireless Mouse', 25, 'ram.jpg'),
-    ('Mechanical Keyboard', 79, 'ram.jpg'),
-    ('USB-C Charger', 19, 'ram.jpg'),
-    ('Bluetooth Headphones', 59, 'ram.jpg'),
-    ('27-inch Monitor', 229, 'ram.jpg'),
-    ('Laptop Stand', 34, 'ram.jpg'),
-    ('Webcam HD', 49, 'ram.jpg'),
-    ('Gaming Chair', 199, 'ram.jpg'),
-    ('External SSD 1TB', 129, 'ram.jpg'),
-    ('Portable Speaker', 45, 'ram.jpg');
+    ('Wireless Mouse', 25, 'mouse.jpg'),
+    ('Mechanical Keyboard', 79, 'keyboard.jpg'),
+    ('USB-C Charger', 19, 'charger.jpg'),
+    ('Bluetooth Headphones', 59, 'headset.jpg'),
+    ('27-inch Monitor', 229, 'monitor.jpg'),
+    ('Laptop Stand', 34, 'stand.jpg'),
+    ('Webcam HD', 49, 'camera.jpg'),
+    ('Gaming Chair', 199, 'chair.jpg'),
+    ('External SSD 1TB', 129, 'ssd.jpg'),
+    ('Portable Speaker', 45, 'speaker.jpg');
 """
 cursor.executescript(populate_tables)
 conn.commit()
