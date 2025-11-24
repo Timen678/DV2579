@@ -3,6 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, logout_user, UserMixin, current_user, login_required
 import sqlite3
 import logging
+import os
+import uuid
 
 # Logging
 db_logger = logging.getLogger("sqlite_trace")
@@ -14,37 +16,85 @@ db_handler.setFormatter(formatter)
 db_logger.addHandler(db_handler)
 
 
+
 def sql_trace(statement):
     db_logger.debug("SQL TRACE: %s", statement)
 
 app = Flask(__name__, static_url_path = "/static")
 app.secret_key = "secret"
 
-<<<<<<< HEAD
+# UPLOAD DIRECTORY
+UPLOAD_FOLDER = "static/images"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 @app.route("/admin")
 def admin():
     return render_template("admin.html")
 
 @app.route("/upload", methods=["POST"])
 def upload():
+    conn = sqlite3.connect('computer_store.db')
+    conn.set_trace_callback(sql_trace)
 
     image = request.files.get("image")
-    product_id = request.form.get("id")
+    product_id = request.form.get("product_id")
 
-    print(image)
-    print(product_id)
+    # Check if uploaded image name is ok
+    if not image or image.filename == '':
+        conn.close()
+        return ("no file selected", 400)
 
+    
+    # Check if supplied product id is valid
+    old_filename = conn.execute('SELECT image FROM products WHERE id = ?', (product_id,)).fetchone()
+    if old_filename is None:
+        conn.close()
+        return ('Not a valid product ID')
+
+
+    old_filepath = os.path.join(app.config["UPLOAD_FOLDER"], old_filename[0])
+    new_filepath = os.path.join(app.config["UPLOAD_FOLDER"], image.filename)
+
+    # Save new image
+    try:
+        image.save(new_filepath)
+    except:
+        conn.close()
+        return ('Internal error', 500)
+
+
+    # Change aspect ratio of image
+    abs_new_filepath = os.path.abspath(new_filepath)
+    temp_file = f"{str(uuid.uuid4())}.jpg"
+    print(abs_new_filepath)
+    os.system(f"ffmpeg -i {abs_new_filepath} -vf scale=200:200 {temp_file} -y")
+    os.remove(f"{abs_new_filepath}")
+    os.rename(f"{temp_file}", abs_new_filepath)
+    
+    # Update product image
+    try:
+        conn.execute("UPDATE products SET image = ? WHERE id = ?", (image.filename, product_id))
+    except:
+        conn.close()
+        return ('Internal error', 500)
+
+    # Remove old file
+    try:
+        os.remove(old_filepath)
+    except:
+        conn.close()
+        return ('internal error', 500)
+    
+    conn.commit()
+    conn.close()
     return render_template("admin.html")
 
-@app.route("/search")
-def search():
-=======
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 @app.route("/")
 def index():
->>>>>>> refs/remotes/origin/main
     conn = sqlite3.connect('computer_store.db')
     conn.set_trace_callback(sql_trace)
 
