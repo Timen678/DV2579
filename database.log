@@ -1,28 +1,10 @@
-import sqlite3
-from werkzeug.security import generate_password_hash, check_password_hash
-import logging
-
-logging.basicConfig(
-    filename = "database.log",
-    level = logging.DEBUG,
-    format = "%(asctime)s - %(levelname)s - %(message)s"
-)
-logger = logging.getLogger("sqlite_trace")
-
-conn = sqlite3.connect("computer_store.db")  # Creates a new database file if it doesn’t exist
-cursor = conn.cursor()
-
-def sql_trace(statement):
-    logger.debug("SQL TRACE: %s", statement)
-
-conn.set_trace_callback(sql_trace)
-
-schema = """
+2025-11-24 12:01:32,351 - DEBUG - SQL TRACE: 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT,
     password TEXT
 );
+2025-11-24 12:01:32,446 - DEBUG - SQL TRACE: 
 
 CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,14 +12,10 @@ CREATE TABLE IF NOT EXISTS products (
     price INTEGER,
     image TEXT
 );
-"""
-cursor.executescript(schema)
-conn.commit()
-
-hashed_pass = generate_password_hash("LIVERPOOL")
-populate_tables = f"""
+2025-11-24 12:01:32,561 - DEBUG - SQL TRACE: 
     INSERT INTO users (username, password) VALUES 
-    ('admin', '{hashed_pass}');
+    ('test_user', 'scrypt:32768:8:1$bglucbx0PDFtMJhz$714eb6eb3b39bd4d146439fc5256550388fa9abb5c217559064ffaf8fe2abe5aa107d1488a551875ccaf130623fe0f27542d5ec3085ea254e4ddda40f695f4d4');
+2025-11-24 12:01:32,572 - DEBUG - SQL TRACE: 
 
     INSERT INTO products (product_name, price, image) VALUES 
     ('Wireless Mouse', 25, 'ram.jpg'),
@@ -50,8 +28,3 @@ populate_tables = f"""
     ('Gaming Chair', 199, 'ram.jpg'),
     ('External SSD 1TB', 129, 'ram.jpg'),
     ('Portable Speaker', 45, 'ram.jpg');
-"""
-cursor.executescript(populate_tables)
-conn.commit()
-
-conn.close()
