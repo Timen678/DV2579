@@ -5,6 +5,10 @@
     <body>
         {% include "navbar.html" %}
         <div id = "products" class = "row g-4 m-1">
+            <form class="d-flex flex-shrink-1 align-items-center mb-0" method="get" action="/">
+                <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success me-3" type="submit">Search</button>
+            </form>
             {% for product in products %}
             <div class = "col-auto">
                 <div class = "card" style = "width: 18rem;">
