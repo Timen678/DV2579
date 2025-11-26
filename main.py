@@ -29,10 +29,12 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 @app.route("/admin")
+@login_required
 def admin():
     return render_template("admin.html")
 
 @app.route("/upload", methods=["POST"])
+@login_required
 def upload():
     conn = sqlite3.connect('computer_store.db')
     conn.set_trace_callback(sql_trace)
