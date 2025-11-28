@@ -30,3 +30,6 @@ python3 -m http.server 80
 # Logs
 Logs are found in multiple locations.
 Database logs are found in /opt/shopwebserver/database.log
+Nginx logs are found in /var/log/nginx/shop_access.log
+User command history is found in /home/user/bash_history
+Root command history is found in /root/bash_history
