@@ -1,0 +1,13 @@
+[Unit]
+Description=My web shop
+After=network.target
+
+[Service]
+User=webuser
+Group=webuser
+WorkingDirectory=/opt/shopwebserver
+ExecStart=/opt/shopwebserver/venv/bin/python3 /opt/shopwebserver/main.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
