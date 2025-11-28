@@ -5,13 +5,16 @@ import sqlite3
 import logging
 import os
 import uuid
+import time
 
 # Logging
 db_logger = logging.getLogger("sqlite_trace")
 db_logger.setLevel(logging.DEBUG)
 db_handler = logging.FileHandler("database.log")
 db_handler.setLevel(logging.DEBUG)
+logging.Formatter.converter = time.gmtime
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+formatter
 db_handler.setFormatter(formatter)
 db_logger.addHandler(db_handler)
 

