@@ -1,2 +1,74 @@
 2025-11-28 11:02:58,809 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
 2025-11-28 11:02:58,904 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 11:13:17,988 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 11:15:23,281 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 11:15:25,646 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 11:15:38,294 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 11:15:39,673 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 12:18:44,796 - DEBUG - SQL TRACE: 
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    password TEXT
+);
+2025-11-28 12:18:44,797 - DEBUG - SQL TRACE: 
+
+CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_name TEXT,
+    price INTEGER,
+    image TEXT
+);
+2025-11-28 12:18:44,908 - DEBUG - SQL TRACE: 
+    INSERT INTO users (username, password) VALUES 
+    ('admin', 'scrypt:32768:8:1$zjbvYNcuqcuwSn8o$6e5a3d1e5e41857cd915df7babebcbc869f980cd953d4bb6b17b92911da4a4070eca13c4bc9f89e5753627f5a146937a5da9165896fc8e136cc94cb5f0aab930');
+2025-11-28 12:18:44,917 - DEBUG - SQL TRACE: 
+
+    INSERT INTO products (product_name, price, image) VALUES 
+    ('Wireless Mouse', 25, 'mouse.jpg'),
+    ('Mechanical Keyboard', 79, 'keyboard.jpg'),
+    ('USB-C Charger', 19, 'charger.jpg'),
+    ('Bluetooth Headphones', 59, 'headset.jpg'),
+    ('27-inch Monitor', 229, 'monitor.jpg'),
+    ('Laptop Stand', 34, 'stand.jpg'),
+    ('Webcam HD', 49, 'camera.jpg'),
+    ('Gaming Chair', 199, 'chair.jpg'),
+    ('External SSD 1TB', 129, 'ssd.jpg'),
+    ('Portable Speaker', 45, 'speaker.jpg'),
+    ('RAM', 150, 'ram.jpg'),
+    ('CPU', 250, 'cpu.jpg');
+2025-11-28 11:19:05,241 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 11:19:12,578 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
+2025-11-28 12:19:59,983 - DEBUG - SQL TRACE: 
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    password TEXT
+);
+2025-11-28 12:20:00,058 - DEBUG - SQL TRACE: 
+
+CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_name TEXT,
+    price INTEGER,
+    image TEXT
+);
+2025-11-28 12:20:00,156 - DEBUG - SQL TRACE: 
+    INSERT INTO users (username, password) VALUES 
+    ('admin', 'scrypt:32768:8:1$7eLeORg2hm7z00tW$5fe44cadadfadf5a0687358dd21ca3c0be7abdd5e83cf04efaece3775e6f1640f81d8e80ccce755ad9eeb454502fa2658a4d6cbdacba84ed65c8f6f167f23025');
+2025-11-28 12:20:00,166 - DEBUG - SQL TRACE: 
+
+    INSERT INTO products (product_name, price, image) VALUES 
+    ('Wireless Mouse', 25, 'mouse.jpg'),
+    ('Mechanical Keyboard', 79, 'keyboard.jpg'),
+    ('USB-C Charger', 19, 'charger.jpg'),
+    ('Bluetooth Headphones', 59, 'headset.jpg'),
+    ('27-inch Monitor', 229, 'monitor.jpg'),
+    ('Laptop Stand', 34, 'stand.jpg'),
+    ('Webcam HD', 49, 'camera.jpg'),
+    ('Gaming Chair', 199, 'chair.jpg'),
+    ('External SSD 1TB', 129, 'ssd.jpg'),
+    ('Portable Speaker', 45, 'speaker.jpg'),
+    ('RAM', 150, 'ram.jpg'),
+    ('CPU', 250, 'cpu.jpg');
+2025-11-28 11:20:22,774 - DEBUG - SQL TRACE: SELECT id, product_name, price, image FROM products WHERE product_name like '%%';
