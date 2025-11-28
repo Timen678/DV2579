@@ -49,7 +49,9 @@ populate_tables = f"""
     ('Webcam HD', 49, 'camera.jpg'),
     ('Gaming Chair', 199, 'chair.jpg'),
     ('External SSD 1TB', 129, 'ssd.jpg'),
-    ('Portable Speaker', 45, 'speaker.jpg');
+    ('Portable Speaker', 45, 'speaker.jpg'),
+    ('RAM', 150, 'ram.jpg'),
+    ('CPU', 250, 'cpu.jpg');
 """
 cursor.executescript(populate_tables)
 conn.commit()
